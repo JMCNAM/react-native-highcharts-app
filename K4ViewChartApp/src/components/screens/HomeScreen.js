@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Content, Button, Card, CardItem } from 'native-base';
 import {View, Text,  Image } from 'react-native';
-import { CardSection, DateSelector } from './common';
+import { CardSection, DateSelector } from '../common';
 import { StackNavigator } from 'react-navigation';
 
 class HomeScreen extends Component {
@@ -10,9 +10,11 @@ class HomeScreen extends Component {
         options:[],
         data:[],
       }
+
   static navigationOptions = ({ navigation }) => {
     const params = navigation.state.params || {};
   };
+
   // Render function; return screen
   render() {
     var dates = [];
@@ -35,7 +37,7 @@ class HomeScreen extends Component {
                 <CardItem>
                   <View style={dateStyle}>
                     <Text style={{fontSize:20, color:'white'}}>Options</Text>
-                    <DateSelector />
+                    <DateSelector date={{date:this.state.date}}/>
                   </View>
                 </CardItem>
 
@@ -43,7 +45,7 @@ class HomeScreen extends Component {
                   <View style={logoStyle}>
                     <Image
                       style={imgStyle}
-                      source={require("../images/logo.bmp")}/>
+                      source={require("../../images/logo.bmp")}/>
                   </View>
                 </CardItem>
 
@@ -103,5 +105,5 @@ const styles = {
     height:250,
     padding: 10
   },
-
+}
 export { HomeScreen };
