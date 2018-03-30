@@ -35,9 +35,10 @@ const AreaChart = (props) => {
                   fillOpacity: 0.2
               }
         },
-        series: [{
-            name: 'Power Houly Prices',
-            data: props.series,
+// Series data set by props.
+    series: [{
+        name: 'Power Houly Prices',
+        data: props.series,
         }]
     };
     return(
@@ -50,6 +51,6 @@ const styles = {
   container: {
     flex:1,
     flexGrow: 1
-  },
-}
-export {AreaChart};
+    },
+    }
+export { AreaChart };

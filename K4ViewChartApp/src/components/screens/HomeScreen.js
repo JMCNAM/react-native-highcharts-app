@@ -1,79 +1,144 @@
 import React, { Component } from 'react';
-import { View, Text, Button } from 'react-native';
+import { Container, Content, Button, Card, CardItem } from 'native-base';
+import { View, Text,  Image } from 'react-native';
+import { DateSelector } from '../common';
 import { StackNavigator } from 'react-navigation';
-import { Card, CardSection, DropOptions } from '../common';
 
+const areaData = require('../../data/zonalPrices.json');
+
+// Class declaration
 class HomeScreen extends Component {
       state = {
         selection: 'Select Series',
         options:[],
         data:[],
       }
+
+
+// Navigaiton passed as state paramater.
   static navigationOptions = ({ navigation }) => {
-    const params = navigation.state.params || {};
+    const { params } = navigation.state || {};
   };
-  // Render function; return screen
-  render() {
+
+
+// Method to select dates from data executed when component mounts.
+  componentDidMount(){
+    console.log("HOMESCREEN DID MOUNT");
     var dates = [];
-    var options = [];
+    var opts = [];
     var date;
     for(var row in barData){
       date = barData[row].D.slice(0,10);
       if(dates.indexOf(date) == -1){
+        // Push unique date into array
         dates.push(date);
-        options.push({value: date});
+        opts.push({value: date});
       }
     }
-    this.state.options = options;
-    return (
-      <View style={{flex:1,}}>
-        <Card style={{flex:1, flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
-        
-          <CardSection>
-            <DropOptions
-              style={{flex: 1}}
-              label="Options"
-              style={{color: '#ffffff'}}
-              data={this.state.options}
-              onChangeText={selection => this.setState({selection})}
-              />
-            </CardSection>
-          
-          <CardSection>
-            <Button
-              title="Go to Chart 1"
-              onPress={() => {
-                /* 1. Navigate to the Details route with params */
-                this.props.navigation.navigate('PowerZonal',{ selection:this.state.selection });
-              }}
-              />
-            </CardSection>
-
-          <CardSection>
-            <Button
-              title="Go to Chart 2"
-              onPress={() => {
-                /* 1. Navigate to the Details route with params */
-                this.props.navigation.navigate('RenewableProduction',{ selection:this.state.selection });
-              }}
-              />
-            </CardSection>
-        
-          <CardSection>
-            <Button
-              title="Go to Chart 3"
-              onPress={() => {
-                /* 1. Navigate to the Details route with params */
-                this.props.navigation.navigate('PowerPrices',{ selection:this.state.selection });
-              }}
-              />
-            </CardSection>
-        </Card>
-      </View>
-    );
+    // Set state and return message.
+    this.setState({options:opts}, () => {
+        console.log("HS state updated by DID", this.state);
+    });
+    //
+    this.setState({data:areaData}, ()=> {
+        console.log("HS state updated by DID", this.state);
+    });
   }
-}
+
+  // Render function; return screen
+  render() {
+    console.log("RENDERING HOMESCREEN");
+    console.log(this.state);
+    const { container, dateStyle, logoStyle, imgStyle, buttonsSection } = styles;
+        return(
+          <Container style={container}>
+            <Content>
+              <Card>
+
+                <CardItem>
+                  <View style={dateStyle}>
+                    <Text style={{fontSize:20, color:'white'}}>Options</Text>
+                    <DateSelector />
+                  </View>
+                </CardItem>
+
+                <CardItem>
+                  <View style={logoStyle}>
+                    <Image
+                      style={imgStyle}
+                      source={require("../../images/logo.bmp")}/>
+                  </View>
+                </CardItem>
+
+                <CardItem>
+                  <View style={buttonsSection}>
+                    <Button
+                      block primary
+                      onPress={ ()=> {this.props.navigation.navigate(
+                          'Basic',{selection:this.state.selection, 
+                                   data:this.state.data})}}
+                        ><Text>Basic Chart</Text>
+                      </Button>
+                   
+                      <Button
+                      block primary
+                      onPress={ ()=> {this.props.navigation.navigate(
+                        'Drop',{selection:this.state.selection, 
+                                 data:this.state.data})}}
+                      
+                        ><Text>Dropdown Chart</Text>
+                      </Button>
+
+                      <Button
+                        block primary
+                        ><Text>Drilldown Chart</Text>
+                      </Button>
+                      
+                  </View>
+                </CardItem>
+
+              </Card>
+            </Content>
+          </Container>
+        );
+      }
+    }
+
 const barData = require('../../data/renewableProductionForcast.json');
+
+const styles = {
+  container:{
+    flex:1,
+    backgroundColor: "#092938",
+    flexDirection:'column',
+    justifyContent: 'center',
+    height: 100
+  },
+  dateStyle:{
+    flex:1,
+    backgroundColor: "#092938",
+    flexDirection:'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  logoStyle:{
+    flex:1,
+    backgroundColor: "#092938",
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding:10,
+  },
+  imgStyle:{
+    width:200,
+    height:200,
+  },
+  buttonsSection:{
+    flex:1,
+    backgroundColor: "#092938",
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    height:250,
+    padding: 10
+  },
+}
 export { HomeScreen };
-
-

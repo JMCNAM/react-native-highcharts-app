@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { Dropdown } from 'react-native-material-dropdown';
 import { Card, CardSection } from './index.js'
 
-const DropOptions = ({label,onChangeText,selection, data,itemCount})=>{
+const DropOption = ({label,onChangeText,selection, data,itemCount})=>{
   const { containerStyle, textStyle } = styles;
     return(
       <View style={containerStyle}>
@@ -28,4 +28,4 @@ const styles = {
     color: '#000',
   },
 };
-export { DropOptions };
+export { DropOption };
