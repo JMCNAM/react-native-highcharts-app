@@ -8,17 +8,25 @@ const areaData = require('../../data/zonalPrices.json');
 
 // Class declaration
 class HomeScreen extends Component {
-      state = {
-        selection: 'Select Series',
-        options:[],
-        data:[],
-      }
+
 
 
 // Navigaiton passed as state paramater.
   static navigationOptions = ({ navigation }) => {
     const { params } = navigation.state || {};
   };
+
+  // Constructor.
+  constructor(props){
+    super(props)
+      this.state = {
+        selection: 'Select Series',
+        dates:[],
+        data:[],
+        minDate:"",
+        maxDate:"",
+      }
+  }
 
 
 // Method to select dates from data executed when component mounts.
@@ -36,7 +44,7 @@ class HomeScreen extends Component {
       }
     }
     // Set state and return message.
-    this.setState({options:opts}, () => {
+    this.setState({dates:opts, minDate:opts[0], maxDate:[opts.length-1]}, () => {
         console.log("HS state updated by DID", this.state);
     });
     //
@@ -58,7 +66,11 @@ class HomeScreen extends Component {
                 <CardItem>
                   <View style={dateStyle}>
                     <Text style={{fontSize:20, color:'white'}}>Options</Text>
-                    <DateSelector />
+                    <DateSelector
+                      onDateChange={(date) => {this.setState({date: date})}} 
+                      minDate={ this.state.minDate }
+                      maxDate={ this.state.maxDate }
+                      />
                   </View>
                 </CardItem>
 
@@ -91,6 +103,9 @@ class HomeScreen extends Component {
 
                       <Button
                         block primary
+                        onPress={ ()=> {this.props.navigation.navigate(
+                          'Drill',{selection:this.state.selection, 
+                                   data:this.state.data})}}
                         ><Text>Drilldown Chart</Text>
                       </Button>
                       

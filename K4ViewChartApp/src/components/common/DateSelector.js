@@ -6,7 +6,11 @@ import { Card, CardSection } from './index.js'
 class DateSelector extends Component {
   constructor(props){
     super(props)
-    this.state = {date: ""}
+    this.state = {
+        date: "",
+        minDate: this.props.minDate,
+        maxDate: this.props.maxDate,
+      }
   }
 
   render(){
@@ -17,8 +21,8 @@ class DateSelector extends Component {
         mode="date"
         placeholder="select date"
         format="YYYY-MM-DD"
-        minDate="2018-03-20"
-        maxDate="2018-03-27"
+        minDate= { this.state.minDate } // "2018-03-20"
+        maxDate= { this.state.maxDate } // "2018-03-27"
         confirmBtnText="Confirm"
         cancelBtnText="Cancel"
         customStyles={{
