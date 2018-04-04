@@ -7,13 +7,14 @@ class DateSelector extends Component {
   constructor(props){
     super(props)
     this.state = {
-        date: "",
+        date: this.props.date,
         minDate: this.props.minDate,
         maxDate: this.props.maxDate,
       }
   }
 
   render(){
+    console.log(this.props);
     return(
       <DatePicker
         style={{width: 200}}
@@ -21,8 +22,8 @@ class DateSelector extends Component {
         mode="date"
         placeholder="select date"
         format="YYYY-MM-DD"
-        minDate= { this.state.minDate } // "2018-03-20"
-        maxDate= { this.state.maxDate } // "2018-03-27"
+        minDate= {this.props.minDate}
+        maxDate= {this.props.maxDate}
         confirmBtnText="Confirm"
         cancelBtnText="Cancel"
         customStyles={{
@@ -33,8 +34,16 @@ class DateSelector extends Component {
             marginLeft: 0
           },
           dateInput: {
-            marginLeft: 36
-          }
+            marginLeft: 36,
+          },
+          placeholderText: {
+                      fontSize: 18,
+                      color: 'white'
+                  },
+         dateText:{
+          color: 'white',
+          fontSize: 18,
+        }
 
         }}
         onDateChange={(date) => {this.setState({date: date})}}

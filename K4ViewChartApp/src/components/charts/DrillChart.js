@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import ChartView from 'react-native-highcharts';
+import ChartView from 'native-highcharts-wrapper';
+//import Highcharts from 'highcharts/highcharts.src.js';
+//import drilldown from 'highcharts/modules/drilldown.src.js';
+
 
 const DrillChart = (props) => {
   console.log("CHART COMPONENT");
   console.log(props);
+  var Highcharts='Highcharts';
+  //drilldown(Highcharts);
   var conf={
       chart: {
           type: 'column',

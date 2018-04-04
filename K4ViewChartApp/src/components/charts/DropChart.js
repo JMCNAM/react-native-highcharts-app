@@ -5,6 +5,7 @@ import ChartView from 'react-native-highcharts';
 const DropChart = (props) => {
   console.log("CHART COMPONENT");
   console.log(props);
+
   var conf={
           chart: {
               type: 'line',
