@@ -5,15 +5,13 @@ import ChartView from 'react-native-highcharts';
 const AreaChart = (props) => {
   console.log("CHART COMPONENT");
   console.log(props);
-    var conf={
+  var conf={
         chart: {
             type: 'area',
             marginBottom: 100,
         },
         title: {
-            text: "Power : Zonal (NORD)",
-            style: {color: "#333333",
-                    fontSize: "20px"}
+            text: "",
         },
         xAxis: {
             tickInterval: 1,
@@ -23,11 +21,11 @@ const AreaChart = (props) => {
         },
         yAxis: {
             title: {
-                text: '€/MH'
+                text: '€/MWh'
             },
           },
         exporting: {
-            enabled: false
+            enabled: true
         },
         plotOptions: {
               series: {
@@ -36,9 +34,9 @@ const AreaChart = (props) => {
               }
         },
 // Series data set by props.
-    series: [{
-        name: 'Power Houly Prices',
-        data: props.series,
+        series: [{
+            name: 'Power Houly Prices',
+            data: props.series,
         }]
     };
     return(

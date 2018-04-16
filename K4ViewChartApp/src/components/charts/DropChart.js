@@ -5,28 +5,23 @@ import ChartView from 'react-native-highcharts';
 const DropChart = (props) => {
   console.log("CHART COMPONENT");
   console.log(props);
-
   var conf={
           chart: {
               type: 'line',
               marginBottom: 100,
           },
           title: {
-              text: props.selection,
-              style: {
-                color: "#333333",
-                fontSize: "20px"
-              }
+              text: '',
           },
           xAxis: {
               tickInterval: 1,
               title: {
-                  text: 'Hour'
+                  text: 'Hour',
               },
             },
           yAxis: {
               title: {
-                  text: '€/MH'
+                  text: '€/MWh'
               },
             },
           exporting: {
@@ -38,11 +33,11 @@ const DropChart = (props) => {
                 fillOpacity: 0.2
             }
           },
-//
-          series: [{
-              name: 'Prices per Hour',
-              data: props.series,
-          }]
+// Series data set by props.
+        series: [{
+            name: props.selection,
+            data: props.series,
+        }]
       };
     return(
       <View style={styles.container}>

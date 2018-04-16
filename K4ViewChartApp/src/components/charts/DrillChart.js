@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import ChartView from 'native-highcharts-wrapper';
-//import Highcharts from 'highcharts/highcharts.src.js';
-//import drilldown from 'highcharts/modules/drilldown.src.js';
-
 
 const DrillChart = (props) => {
   console.log("CHART COMPONENT");
   console.log(props);
+  // Decalre Highcharts variable
   var Highcharts='Highcharts';
-  //drilldown(Highcharts);
   var conf={
       chart: {
           type: 'column',
@@ -54,8 +51,8 @@ const DrillChart = (props) => {
   );
 }
   const styles = {
-  container: {
-  flex:1
-    },
+      container: {
+      flex:1
+        },
   }
 export { DrillChart };
