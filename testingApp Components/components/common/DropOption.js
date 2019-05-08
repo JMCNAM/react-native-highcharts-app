@@ -13,8 +13,6 @@ const DropOption = ({label,onChangeText,selection, data,itemCount})=>{
           style={textStyle}
           itemCount={itemCount}
           onChangeText={onChangeText}
-          textColor='white'
-          placeholderTextColor='white'
         >
         </Dropdown>
       </View>
@@ -23,15 +21,11 @@ const DropOption = ({label,onChangeText,selection, data,itemCount})=>{
 const styles = {
   containerStyle: {
     flex: 1,
-    backgroundColor: "#092938",
+    backgroundColor: "#fff",
   },
   textStyle: {
     alignSelf: 'center',
-    color: 'white',
+    color: '#000',
   },
-  label: {
-    color: 'white',
-    fontSize: 15,
-  }
 };
 export { DropOption };
